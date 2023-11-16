@@ -14,3 +14,7 @@ Therefore, with this pair of LEDs, it is possible to provide the user with diffe
 | ----------- | -------------- |
 | PA9         | Blue LED       |
 | PB2         | GNSS TIMEPULSE |
+
+## Board
+![KiCad 3D View Front](/0_Gitbook/Images/Kicad_3DViewFront_BnW_LED.png)
+![KiCad 3D View Back](/0_Gitbook/Images/Kicad_3DViewBack_BnW_LED.png)
