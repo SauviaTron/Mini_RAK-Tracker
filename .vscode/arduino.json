@@ -1,0 +1,6 @@
+{
+    "port": "COM3",
+    "configuration": "debug=l0,supportat=1",
+    "board": "rak_rui:stm32:WisDuoRAK3172EvaluationBoard",
+    "sketch": "2_Firmware\\0_LEDs_Blink\\0_LEDs_Blink.ino"
+}
