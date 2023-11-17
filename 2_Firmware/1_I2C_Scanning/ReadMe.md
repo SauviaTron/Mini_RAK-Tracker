@@ -13,7 +13,7 @@ This program is designed to detect the sensors on the board, each of which is as
 
 <div align="center">
 
-COLUMN&nbsp;&nbsp;&nbsp;1 | </br>COLUMN 2 | </br></br>COLUMN 3
+COLUMN1 | COLUMN 2 | COLUMN 3
 :--- | :---: | ---:
 </br></br>left | center | </br></br>right
 </div>
