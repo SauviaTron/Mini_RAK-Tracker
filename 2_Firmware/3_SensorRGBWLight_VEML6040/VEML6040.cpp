@@ -1,3 +1,4 @@
+#include <stdint.h>
 /*
 
 The MIT License (MIT)
@@ -23,12 +24,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 */
-
+#include <Arduino.h>
 #include "Wire.h"
 #ifndef __MATH_H
 #include <math.h>
 #endif
-#include "veml6040.h"
+#include "VEML6040.h"
 
 
 VEML6040::VEML6040(void) {
@@ -71,19 +72,27 @@ uint16_t VEML6040::read(uint8_t commandCode) {
 }
 
 uint16_t VEML6040::getRed(void) {
-  return(read(COMMAND_CODE_RED));
+  uint16_t red = read(COMMAND_CODE_RED) ;
+  Serial.println( (String)"Red : " + red );
+  return red;
 }
 
 uint16_t VEML6040::getGreen(void) {
-  return(read(COMMAND_CODE_GREEN));
+  uint16_t green = read(COMMAND_CODE_GREEN) ;
+  Serial.println( (String)"Green : " + green );
+  return green;
 }
 
 uint16_t VEML6040::getBlue(void) {
-  return(read(COMMAND_CODE_BLUE));
+  uint16_t blue = read(COMMAND_CODE_BLUE) ;
+  Serial.println( (String)"Blue : " + blue );
+  return blue;
 }
 
 uint16_t VEML6040::getWhite(void) {
-  return(read(COMMAND_CODE_WHITE));
+  uint16_t white = read(COMMAND_CODE_WHITE) ;
+  Serial.println( (String)"White : " + white );
+  return white;
 }
 
 float VEML6040::getAmbientLight(void) {
@@ -109,6 +118,8 @@ float VEML6040::getAmbientLight(void) {
     default:                  ambientLightInLux = -1;
                               break;                             
   } 
+
+  Serial.println( (String)"Ambient light : " + ambientLightInLux );
   return ambientLightInLux;
 }
 
@@ -123,6 +134,67 @@ uint16_t VEML6040::getCCT(float offset) {
   ccti = ((float)red-(float)blue) / (float)green;
   ccti = ccti + offset; 
   cct = 4278.6 * pow(ccti,-1.2455);
-  
+
+  Serial.println( (String)"Correlated Color Temperature in 260K : " + (uint16_t)cct );
   return((uint16_t)cct);
 }
+
+void VEML6040::Configuration( ) {
+  
+  begin();
+  setConfiguration(VEML6040_IT_320MS + VEML6040_AF_AUTO + VEML6040_SD_ENABLE);
+  delay(10);
+  Serial.println("  VEML6040 - WakeUp");
+}
+
+void VEML6040::Sleep(){
+  setConfiguration( VEML6040_IT_40MS +      // Integration Time setting
+                    VEML6040_AF_AUTO +      // Auto force mode - Auto
+                    VEML6040_SD_DISABLE);   // Chip shutdown - Disable Color sensor
+  Serial.println("  VEML6040 - Sleep");
+}
+
+void VEML6040::getData( uint16_t *Red, uint16_t *Green, uint16_t *Blue, uint16_t *White, float *AmbientLight, uint16_t *CCT ){
+  
+  *Red = read(COMMAND_CODE_RED);
+  *Green = read(COMMAND_CODE_GREEN);
+  *Blue = read(COMMAND_CODE_BLUE);
+  *White = read(COMMAND_CODE_WHITE) ;
+
+  float ccti = ((float)*Red-(float)*Blue) / (float)*Green;
+  ccti = ccti + 0.5 ; 
+  float CCT_float = 4278.6 * pow(ccti,-1.2455);
+  *CCT = (uint16_t)CCT_float ;
+
+  uint16_t sensorValue = *Green ;
+  
+  switch(lastConfiguration & 0x70) {
+  
+    case VEML6040_IT_40MS:    *AmbientLight = sensorValue * VEML6040_GSENS_40MS;
+                              break;
+    case VEML6040_IT_80MS:    *AmbientLight = sensorValue * VEML6040_GSENS_80MS;
+                              break;
+    case VEML6040_IT_160MS:   *AmbientLight = sensorValue * VEML6040_GSENS_160MS;
+                              break;
+    case VEML6040_IT_320MS:   *AmbientLight = sensorValue * VEML6040_GSENS_320MS;
+                              break;
+    case VEML6040_IT_640MS:   *AmbientLight = sensorValue * VEML6040_GSENS_640MS;
+                              break; 
+    case VEML6040_IT_1280MS:  *AmbientLight = sensorValue * VEML6040_GSENS_1280MS; 
+                              break;   
+    default:                  *AmbientLight = -1;
+                              break;                             
+  } 
+
+  Serial.print( (String)"  R(" + *Red   );
+  Serial.print( (String)") G(" + *Green );
+  Serial.print( (String)") B(" + *Blue  );
+  Serial.print( (String)") W(" + *White ); Serial.println(")") ;
+  Serial.println( (String)"  Ambient light : " + *AmbientLight );
+  Serial.println( (String)"  Correlated Color Temperature in 260K : " + *CCT );
+  
+
+}
+
+
+

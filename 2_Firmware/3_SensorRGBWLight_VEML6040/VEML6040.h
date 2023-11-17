@@ -82,6 +82,10 @@ class VEML6040 {
     uint16_t getWhite(void);
     uint16_t getCCT(float offset = 0.5);  
     float getAmbientLight(void);
+
+    void Configuration( );
+    void Sleep() ;
+    void getData( uint16_t *Red, uint16_t *Green, uint16_t *Blue, uint16_t *White, float *AmbientLight, uint16_t *CCT );
 };
 
 #endif
