@@ -13,9 +13,12 @@ I2C Address | Description
 
 <div align="center">
 
-COLUMN1 | COLUMN 2 
---- | ---
-left | center 
+I2C Address | Description    
+--- | --- 
+0x10        | RGBW Light     
+0x19        | Accelerometer  
+0x1E        | Magnetometer   
+0x76        | Pressure    
 </div>
 
 
