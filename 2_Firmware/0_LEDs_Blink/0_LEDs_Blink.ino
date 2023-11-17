@@ -1,7 +1,7 @@
 /*  
- *  Created on: 16/11/2023
- *      Author: Andrea Sauviat
- *      E-mail: a-sauviat@laposte.net
+ *  Last Update: 17/11/2023
+ *       Author: Andrea Sauviat
+ *       E-mail: a-sauviat@laposte.net
  * 
  *  Description:  Blinks LEDs on the Mini RAK-Tracker
  *        
