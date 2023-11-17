@@ -19,4 +19,3 @@ Therefore, with this pair of LEDs, it is possible to provide the user with diffe
 
 ## Board
 ![KiCad 3D View Front](/0_GitBook/Images/Kicad_3DViewFront_BnW_Sensors.png)
-![KiCad 3D View Back](/0_GitBook/Images/Kicad_3DViewBack_BnW_Sensors.png)
