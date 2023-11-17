@@ -7,7 +7,7 @@ This program is designed to detect the sensors on the board, each of which is as
 <div align="center">
 
 I2C Address | Description    
---- | --- 
+----------- | ------------- 
 0x10        | RGBW Light     
 0x19        | Accelerometer  
 0x1E        | Magnetometer   
