@@ -29,19 +29,20 @@ void BMP280_WakeUp( ) {
                         Adafruit_BMP280::FILTER_X16,      /* Filtering. */
                         Adafruit_BMP280::STANDBY_MS_500); /* Standby time. */
 
-    Serial.println("BMP280 - Wakeup") ;
+    Serial.println("BMP280 - Wakeup") ; delay(250) ;
                         
 }
 
 void BMP280_Sleep( ) {
 
-    BMP280.setSampling( Adafruit_BMP280::MODE_SLEEP,     /* Operating Mode. */
-                        Adafruit_BMP280::SAMPLING_NONE,     /* Temp. oversampling */
+    BMP280.setSampling( Adafruit_BMP280::MODE_SLEEP,       /* Operating Mode. */
+                        Adafruit_BMP280::SAMPLING_NONE,    /* Temp. oversampling */
                         Adafruit_BMP280::SAMPLING_NONE,    /* Pressure oversampling */
-                        Adafruit_BMP280::FILTER_OFF,      /* Filtering. */
-                        Adafruit_BMP280::STANDBY_MS_1); /* Standby time. */
+                        Adafruit_BMP280::FILTER_OFF,       /* Filtering. */
+                        Adafruit_BMP280::STANDBY_MS_1);    /* Standby time. */
                         
     Serial.println("BMP280 - Sleep");
+
 }
 
 float BMP280_GetTemperature( bool Display_Value ) {
