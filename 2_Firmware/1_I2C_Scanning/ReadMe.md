@@ -14,8 +14,8 @@ This program is designed to detect the sensors on the board, each of which is as
 <div align="center">
 
 COLUMN1 | COLUMN 2 
-:--- | :---: 
-</br></br>left | center 
+--- | ---
+left | center 
 </div>
 
 
